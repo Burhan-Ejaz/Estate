@@ -1,8 +1,16 @@
 
 import axios from "axios";
 
+// In production the frontend and backend share an origin behind the vercel.json
+// rewrites, so a relative path is what works. Only dev needs the absolute URL --
+// falling back to localhost in a production build ships a site that calls the
+// visitor's own machine.
+const baseURL =
+    import.meta.env.VITE_API_URL ||
+    (import.meta.env.DEV ? "http://localhost:3000/api" : "/api");
+
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || "http://localhost:3000/api",
+    baseURL,
     headers: {
         "Content-Type": "application/json",
     },
