@@ -1,0 +1,50 @@
+.agents-page {
+  max-width: 1200px;
+  margin: auto;
+  padding: 50px 8%;
+}
+
+.agents-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.agents-header h1 {
+  font-size: 36px;
+  color: #111827;
+  margin-bottom: 10px;
+}
+
+.agents-header p {
+  color: #6b7280;
+  font-size: 16px;
+}
+
+.agent-card {
+  text-align: center;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.agent-avatar {
+  background: #4a6cf7;
+  margin-bottom: 16px;
+}
+
+.agent-name {
+  font-size: 18px;
+  color: #111827;
+  margin-bottom: 6px;
+}
+
+.agent-email {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.agents-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 0;
+}

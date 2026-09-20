@@ -1,0 +1,14 @@
+.agent-maindiv{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    .agent-leftside{
+        width: 23%;
+    }
+    .agent-rightside{
+        width: 80%;
+        background-color: #ffffff;
+        overflow-y: auto;
+    }
+
+}

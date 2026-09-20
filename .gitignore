@@ -1,0 +1,12 @@
+node_modules
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+
+# Local tool folders
+.claude
+.playwright-cli
+.vscode/*
+!.vscode/extensions.json

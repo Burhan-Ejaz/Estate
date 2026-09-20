@@ -1,0 +1,439 @@
+.dash {
+  --surface-1: #ffffff;
+  --page-plane: #f6f7f9;
+  --text-primary: #0b0b0b;
+  --text-secondary: #52514e;
+  --text-muted: #898781;
+  --hairline: rgba(11, 11, 11, 0.09);
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --good: #006300;
+  --critical: #d03b3b;
+
+  min-height: 100%;
+  padding: 24px 28px 40px;
+  background: var(--page-plane);
+  color: var(--text-primary);
+}
+
+/* The surrounding admin chrome is light-only, so dark values are opt-in via an
+   explicit data-theme stamp rather than the OS preference -- following the OS here
+   would leave a dark dashboard inside a white antd shell. Nothing sets data-theme
+   today; these are the steps to use if a theme toggle is added. The recharts marks
+   take their colours from Utils/chartTheme.js, so that file needs the same switch. */
+:root[data-theme='dark'] .dash {
+  color-scheme: dark;
+  --surface-1: #1a1a19;
+  --page-plane: #0d0d0d;
+  --text-primary: #ffffff;
+  --text-secondary: #c3c2b7;
+  --hairline: rgba(255, 255, 255, 0.1);
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --good: #0ca30c;
+}
+
+/* ---------- page header ---------- */
+
+.dash-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.dash-head h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.dash-head p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.dash-head-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ---------- cards ---------- */
+
+.dash-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  padding: 18px 20px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.dash-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.dash-card-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 620;
+}
+
+.dash-card-sub {
+  margin: 2px 0 16px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ---------- KPI tiles ---------- */
+
+.kpi {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.kpi:hover,
+.kpi:focus-visible {
+  border-color: var(--series-1);
+  transform: translateY(-2px);
+}
+
+.kpi:focus-visible {
+  outline: 2px solid var(--series-1);
+  outline-offset: 2px;
+}
+
+.kpi-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.kpi-icon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  font-size: 15px;
+  flex: none;
+}
+
+.kpi-label {
+  font-size: 12px;
+  font-weight: 560;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.kpi-value {
+  font-size: 30px;
+  font-weight: 620;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  /* proportional figures: tabular-nums makes display sizes read loose */
+}
+
+.kpi-foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.kpi-delta {
+  font-size: 12px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.kpi-delta b {
+  font-weight: 620;
+}
+
+.kpi-delta.up b {
+  color: var(--good);
+}
+
+.kpi-delta.down b {
+  color: var(--critical);
+}
+
+.kpi-spark {
+  width: 84px;
+  height: 30px;
+  flex: none;
+}
+
+/* ---------- donut ---------- */
+
+.donut-wrap {
+  position: relative;
+}
+
+.donut-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+}
+
+.donut-center strong {
+  display: block;
+  font-size: 32px;
+  font-weight: 620;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.donut-center span {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Legend doubles as the value read-out, so no value is tooltip-only. */
+.legend {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.legend i {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex: none;
+}
+
+.legend .legend-name {
+  flex: 1;
+  text-transform: capitalize;
+}
+
+.legend .legend-val {
+  font-weight: 620;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.legend .legend-pct {
+  width: 44px;
+  text-align: right;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- tooltip ---------- */
+
+.viz-tip {
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  padding: 8px 10px;
+  box-shadow: 0 6px 20px rgba(11, 11, 11, 0.1);
+  font-size: 12px;
+  min-width: 132px;
+}
+
+.viz-tip-head {
+  font-weight: 620;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  text-transform: capitalize;
+}
+
+.viz-tip-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.viz-tip-row i {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  flex: none;
+}
+
+.viz-tip-row span {
+  flex: 1;
+  text-transform: capitalize;
+}
+
+.viz-tip-row b {
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- agent leaderboard ---------- */
+
+.rank-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rank-no {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: var(--page-plane);
+  font-size: 11px;
+  font-weight: 620;
+  color: var(--text-secondary);
+  flex: none;
+}
+
+.rank-name {
+  font-weight: 560;
+}
+
+.rank-mail {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.meter {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--page-plane);
+  overflow: hidden;
+}
+
+.meter > span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--series-1);
+}
+
+.dash-empty {
+  display: grid;
+  place-items: center;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* Hold the previous render at reduced opacity on refetch: no skeleton flash. */
+.dash-refreshing {
+  opacity: 0.55;
+  transition: opacity 0.2s ease;
+}
+
+@media (max-width: 640px) {
+  .dash {
+    padding: 16px 16px 32px;
+  }
+}
+
+/* ---------- inline legend (multi-series charts) ---------- */
+
+.legend-inline {
+  grid-auto-flow: column;
+  justify-content: start;
+  gap: 20px;
+  margin-top: 4px;
+}
+
+.legend-inline li {
+  font-size: 12px;
+}
+
+/* ---------- application pipeline ---------- */
+
+/* Spread the three rows over the card so a short panel does not end in dead space. */
+.pipeline {
+  display: grid;
+  flex: 1;
+  align-content: space-evenly;
+  gap: 18px;
+  padding: 8px 0;
+}
+
+.pipeline-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+.pipeline-icon {
+  display: inline-flex;
+  flex: none;
+}
+
+.pipeline-label {
+  flex: 1;
+  color: var(--text-secondary);
+}
+
+.pipeline-count {
+  font-weight: 620;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- antd overrides scoped to the dashboard ---------- */
+
+.dash .ant-table-thead > tr > th {
+  background: transparent;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.dash .ant-table-cell {
+  font-variant-numeric: tabular-nums;
+}
+
+.dash .ant-table-tbody > tr > td {
+  border-bottom: 1px solid var(--hairline);
+}
+
+.legend-note {
+  color: var(--text-primary);
+  font-weight: 620;
+  font-variant-numeric: tabular-nums;
+}

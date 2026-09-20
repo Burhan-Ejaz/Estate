@@ -1,0 +1,71 @@
+/* LOGIN OUTER CONTAINER */
+.outerdiv {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+  gap: 12px;
+}
+
+/* LOGIN BOX */
+.inner-div {
+
+
+  width: 400px;
+  background-color: #ffffff;
+  padding: 18px;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.inner-div h2 {
+  text-align: center;
+  margin-bottom: 14px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* FORM */
+.inner-div form {
+  width: 100%;
+}
+
+/* INPUTS */
+.ant-input,
+.ant-input-password {
+  height: 38px;
+  border-radius: 6px !important;
+}
+
+/* FOCUS */
+.ant-input:focus,
+.ant-input-password:focus-within {
+  border-color: #1677ff !important;
+}
+
+/* BUTTON */
+.ant-btn {
+  height: 38px;
+  border-radius: 6px;
+}
+
+/* TEXT BELOW */
+.outerdiv p {
+  font-size: 14px;
+  color: #555;
+  text-align: center;
+}
+
+/* LINK */
+.outerdiv a {
+  color: #1677ff;
+  text-decoration: none;
+  margin-left: 4px;
+  font-weight: 500;
+}
+
+.outerdiv a:hover {
+  text-decoration: underline;
+}

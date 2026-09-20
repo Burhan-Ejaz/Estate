@@ -1,0 +1,57 @@
+.messages-page {
+  height: calc(100vh - 80px);
+  width: 100%;
+}
+
+.messages-layout {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.messages-sidebar {
+  width: 340px;
+  min-width: 340px;
+  border-right: 1px solid #e5e7eb;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.messages-window {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+}
+
+.messages-window .str-chat,
+.messages-window .str-chat__channel,
+.messages-window .str-chat__main-panel {
+  height: 100%;
+}
+
+.messages-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  padding: 60px 0;
+}
+
+@media (max-width: 800px) {
+  .messages-layout {
+    flex-direction: column;
+  }
+
+  .messages-sidebar {
+    width: 100%;
+    min-width: 0;
+    height: 200px;
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .messages-window {
+    height: calc(100% - 200px);
+  }
+}
