@@ -2,10 +2,19 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 
-const uploadDir = path.join(process.cwd(), "uploads");
+// Vercel's filesystem is read-only apart from /tmp, and this runs at import time,
+// so an unguarded mkdir here takes the whole server down on boot rather than just
+// breaking uploads. Files written to /tmp do not persist between invocations.
+const uploadDir = process.env.VERCEL
+    ? path.join("/tmp", "uploads")
+    : path.join(process.cwd(), "uploads");
 
-if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir, { recursive: true });
+try {
+    if (!fs.existsSync(uploadDir)) {
+        fs.mkdirSync(uploadDir, { recursive: true });
+    }
+} catch (error) {
+    console.warn("Upload directory unavailable, uploads will not persist:", error.message);
 }
 
 const storage = multer.diskStorage({
